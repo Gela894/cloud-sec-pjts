@@ -14,13 +14,13 @@ I’m a former U.S. Navy vetran, worked as an ISSO and excited about transitioni
 
 ## ⚙️ Featured Projects
 
-| # | Project | Description | Framework Alignment |
+| # | Project | Description | Documentation |
 |---|----------|--------------|---------------------|
-| 1 | [Secure VPC Deployment](./Projects/secure-vpc-deployment) | Hardened AWS network w/ least privilege IAM & logging | NIST AC, AU, SC |
-| 2 | [Data Protection & Encryption](./Projects/aws-config-remediation) | Encryption-at-rest and in-transit | NIST SC, MP |
-| 3 | [Secure DevSecOps Pipeline](./Projects/devsecops-pipeline) | Automate deployment, Integrate security testing | NISTAC, IA, AU |
-| 4 | [Cloud Identity Governance](./Projects/guardduty-ir-automation) | Automated identity governance solution| NIST AC, IA |
-| 5 | [Cloud Security Automation](./Projects/zero-trust-architecture) | Automate compliance and incident response workflows | NIST 1R, SI |
+| 1 | [Secure VPC Deployment](./Projects/secure-vpc-deployment) | [View in Notion](https://notion.so/yourprojectlink1) |
+| 2 | [Data Protection & Encryption](./Projects/aws-config-remediation) | [View in Notion](https://notion.so/yourprojectlink1) |
+| 3 | [Secure DevSecOps Pipeline](./Projects/devsecops-pipeline) | [View in Notion](https://notion.so/yourprojectlink1) |
+| 4 | [Cloud Identity Governance](./Projects/guardduty-ir-automation) | [View in Notion](https://notion.so/yourprojectlink1) |
+| 5 | [Cloud Security Automation](./Projects/zero-trust-architecture) | [View in Notion](https://notion.so/yourprojectlink1) |
 
 ---
 
@@ -47,5 +47,6 @@ I’m a former U.S. Navy vetran, worked as an ISSO and excited about transitioni
 ## 🌐 Additional Links
 - [Notion Documentation Hub](https://www.notion.so/Secure-VPC-Deployment-Project-Documentation-29c12da2720580148f6cd627ebf06ecb?source=copy_link)
 - [LinkedIn Profile](https://linkedin.com/in/yourname)
+
 
 
