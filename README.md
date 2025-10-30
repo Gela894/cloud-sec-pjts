@@ -36,3 +36,14 @@ I’m a former U.S. Navy vetran, worked as an ISSO and excited about transitioni
 - GIAC Cloud Security Automation (GCSA) *(in progress)*
 - GIAC Cloud Threat Detection (GCTD) *(in progress)*
 - AWS Certified Security – Specialty *(in progress)*
+
+## 🧠 Tech Stack
+**Cloud:** AWS (EC2, VPC, IAM, KMS, GuardDuty, Config)  
+**IaC:** Terraform, CloudFormation  
+**Automation:** Python, Lambda, EventBridge  
+**Compliance:** NIST 800-53, FedRAMP, RMF, Zero Trust
+
+
+## 🌐 Additional Links
+- [Notion Documentation Hub](https://notion.so/your-portfolio-link)
+- [LinkedIn Profile](https://linkedin.com/in/yourname)
