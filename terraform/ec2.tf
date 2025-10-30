@@ -1,7 +1,7 @@
+# Provider Configuration
 provider "aws" {
   region = var.aws_region
 }
-
 # Create Security group for ALB
 resource "aws_security_group" "alb-shield-sg" {
   name        = "alb-shield-secgroup"
@@ -68,7 +68,7 @@ resource "aws_iam_instance_profile" "shield_ec2_instance_profile" {
 # Create a Launch Template using Amazon Linux 2023 AMI and install NGINX
 resource "aws_launch_template" "app-shield-lt" {
   name_prefix   = "app-shield-lt-"
-  image_id      = data.aws_ami.amazon_linux_2023.id
+  image_id      = "ami-0bdd88bd06d16ba03" # Amazon Linux 2023 AMI in us-east-1
   instance_type = "t3.micro"
   vpc_security_group_ids = [aws_security_group.app-shield-sg.id]
 
@@ -76,13 +76,14 @@ resource "aws_launch_template" "app-shield-lt" {
     name = aws_iam_instance_profile.shield_ec2_instance_profile.name
   }
 
-  user_data = <<-EOF
+  user_data = base64encode(<<-EOF
               #!/bin/bash
               yum update -y
               amazon-linux-extras install nginx1 -y
               systemctl start nginx
               systemctl enable nginx
               EOF
+  )
 
   tag_specifications {
     resource_type = "instance"
@@ -235,4 +236,29 @@ resource "aws_cloudwatch_metric_alarm" "alb_5xx_alarm" {
   }
 
   alarm_description = "Alarm when ALB returns 5XX errors"
+}
+
+# verify access via ALB DNS + SSM 
+resource "aws_ssm_document" "alb_access" {
+  name          = "app-shield-alb-access"
+  document_type = "Session"
+
+  content = jsonencode({
+    schemaVersion = "2.2"
+    description   = "Session document to verify access to ALB"
+    mainSteps     = [
+      {
+        action = "aws:runCommand"
+        name   = "verifyALBAccess"
+        inputs = {
+          DocumentName = "AWS-RunShellScript"
+          Parameters = {
+            commands = [
+              "curl -I ${aws_lb.app-shield-alb.dns_name}"
+            ]
+          }
+        }
+      }
+    ]
+  })
 }
