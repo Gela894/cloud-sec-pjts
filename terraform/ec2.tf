@@ -201,7 +201,7 @@ resource "aws_iam_role" "vpc_flow_logs_role" {
 }
 resource "aws_iam_role_policy_attachment" "vpc_flow_logs_role_attachment" {
   role       = aws_iam_role.vpc_flow_logs_role.name
-  policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonVPCCFlowLogsRole"
+  policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonVPCFlowLogsRole"
 }
 
 data "aws_iam_policy_document" "vpc_flow_logs_role_policy" {
@@ -241,11 +241,11 @@ resource "aws_cloudwatch_metric_alarm" "alb_5xx_alarm" {
 # verify access via ALB DNS + SSM 
 resource "aws_ssm_document" "alb_access" {
   name          = "app-shield-alb-access"
-  document_type = "Session"
+  document_type = "Command"
 
   content = jsonencode({
     schemaVersion = "2.2"
-    description   = "Session document to verify access to ALB"
+    description   = "Command document to verify access to ALB"
     mainSteps     = [
       {
         action = "aws:runCommand"
