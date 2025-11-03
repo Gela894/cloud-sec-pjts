@@ -219,6 +219,18 @@ data "aws_iam_policy_document" "vpc_flow_logs_role_policy" {
   }
 }
 
+resource "aws_iam_policy" "vpc_flow_logs_custom" {
+name = "shield-vpc-flow-logs-policy"
+path = "/"
+description = "Policy for VPC Flow Logs to write to CloudWatch Logs"
+
+policy = data.aws_iam_policy_document.vpc_flow_logs_role_policy.json
+}
+
+resource "aws_iam_role_policy_attachment" "vpc_flow_logs_role_custom_attachment" {
+role = aws_iam_role.vpc_flow_logs_role.name
+policy_arn = aws_iam_policy.vpc_flow_logs_custom.arn
+}
 
 # Create simple ALB 5XX alarm
 resource "aws_cloudwatch_metric_alarm" "alb_5xx_alarm" {
@@ -248,15 +260,12 @@ resource "aws_ssm_document" "alb_access" {
     description   = "Command document to verify access to ALB"
     mainSteps     = [
       {
-        action = "aws:runCommand"
+        action = "aws:runShellScript"
         name   = "verifyALBAccess"
         inputs = {
-          DocumentName = "AWS-RunShellScript"
-          Parameters = {
-            commands = [
-              "curl -I ${aws_lb.app-shield-alb.dns_name}"
-            ]
-          }
+          runCommand = [
+            "curl -I ${aws_lb.app-shield-alb.dns_name}"
+          ]
         }
       }
     ]
