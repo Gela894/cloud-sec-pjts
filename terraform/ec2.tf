@@ -199,10 +199,6 @@ resource "aws_iam_role" "vpc_flow_logs_role" {
     ]
   })
 }
-resource "aws_iam_role_policy_attachment" "vpc_flow_logs_role_attachment" {
-  role       = aws_iam_role.vpc_flow_logs_role.name
-  policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonVPCFlowLogsRole"
-}
 
 data "aws_iam_policy_document" "vpc_flow_logs_role_policy" {
   statement {
@@ -223,7 +219,6 @@ resource "aws_iam_policy" "vpc_flow_logs_custom" {
 name = "shield-vpc-flow-logs-policy"
 path = "/"
 description = "Policy for VPC Flow Logs to write to CloudWatch Logs"
-
 policy = data.aws_iam_policy_document.vpc_flow_logs_role_policy.json
 }
 
